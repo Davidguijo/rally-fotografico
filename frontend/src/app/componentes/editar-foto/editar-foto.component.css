@@ -1,0 +1,201 @@
+/*Estilo general*/
+.pagina-editar-foto {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/*Estilos del hero (donde pongo la imagen del fondo con los peces)*/
+.hero-editar-foto {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(rgba(0, 105, 148, 0.7), rgba(0, 105, 148, 0.7)), url('/assets/imagenes/imagen2.jpg') center/cover fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px 20px;
+}
+
+/*Estilos del contendedor del formulario*/
+.contenedor-editar-foto {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/*Estilos para el titulop*/
+h2 {
+  color: #0077a8;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+/*Aqui los estilos de los inputs y los labels del formulario*/
+.grupo-formulario {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #2B2D42;
+}
+
+input[type="text"], input[type="file"] {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+input[type="file"] {
+  padding: 0.5rem;
+  background-color: transparent;
+}
+
+/*Estilos para cuando le hago focus a los inputs del formulario*/
+input:focus {
+  outline: none;
+  border-color: #0077a8;
+  box-shadow: 0 0 0 2px rgba(0, 119, 168, 0.2);
+}
+
+input.invalid {
+  border-color: #dc3545; /*Se pone rojo el borde si esta mal*/
+}
+
+/*Aqui muestro porque esta mal la validación, con el color de la letra en rojo*/
+.mensaje-error {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/*Estilo general para los botones*/
+.botones-accion {
+  display: flex;
+  gap: 15px;
+  margin-top: 1.5rem;
+}
+
+/*Estilos del boton de guardar los cambios*/
+.btn-guardar {
+  flex: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  background-color: #28a745;
+  color: white;
+}
+
+/*Los estilos de cuando el formulario esta bien y deje enviarlo*/
+.btn-guardar:hover:not(:disabled) {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*Aqui al contrario, se pone gris y no te deja clicar cuando no esté bien rellenado*/
+.btn-guardar:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/*Cuadrito para los estilos de la vista previa de la imagen*/
+.vista-previa {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  text-align: center;
+  border: 1px dashed #dee2e6;
+  border-radius: 8px;
+}
+
+/*Estilos de la imagen previa (la que se ve antes de subirse)*/
+.vista-previa img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  border: 2px solid #E4F1F6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/*Estilos para las alertas*/
+.alerta {
+  padding: 0.75rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/*Estilos para cuando vaya bien*/
+.alerta-exito {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/*Estilos para cuando efectivamente no vaya bien*/
+.alerta-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/*Estilos para enlaces*/
+.enlaces-formulario {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.enlace-volver {
+  color: #0077a8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin: 0.5rem 0;
+}
+
+.enlace-volver:hover {
+  color: #004d66;
+  text-decoration: underline;
+}
+
+/*Para hacerlo responsivo*/
+@media (max-width: 768px) {
+  .contenedor-editar-foto {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .botones-accion {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .vista-previa img {
+    max-height: 250px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}

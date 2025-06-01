@@ -1,0 +1,238 @@
+/*Estilo general de la barra de navegacion*/
+.navbar {
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+  background-color: #0077a8;
+}
+
+/*Estilos para el nombre de DeepShot*/
+.navbar-brand {
+  font-size: 1.25rem;
+  color: white;
+}
+
+/*Estilos de los enlaces de la barra de navegacio*/
+.nav-link {
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 1rem !important;
+  color: white;
+}
+
+/*Estilo para la línea que aparece cuando pasas por los enlaces*/
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+  width: calc(100% - 2rem);
+  height: 2px;
+  background-color: #FF7F50;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/*Hero que tiene la imagen de fondo de los pescadicos*/
+.hero-galeria {
+  background: linear-gradient(rgba(0, 42, 82, 0.6), rgba(0, 42, 82, 0.6)), url('/assets/imagenes/imagen2.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+}
+
+/*Estilos de los contenedores de las tarjetas de las fotos*/
+.foto-card {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.foto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/*Estilos de la imagenes*/
+.foto-imagen {
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/*Pequeñita animación de las imagenes cuando pasas el raeton por encima*/
+.foto-card:hover .foto-imagen {
+  transform: scale(1.05);
+}
+
+/*Etiqueta que flota en la esquina*/
+.foto-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/*Icono de que la galeria esta vacia*/
+.icono-vacio {
+  font-size: 4rem;
+  color: #e9ecef;
+}
+
+/*Estilos de los botones destacados*/
+.btn-destacado {
+  background-color: #FF7F50;
+  border-color: #FF7F50;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+/*Estilos para cuando hago hover sobre el boton destacado (el de arriba)*/
+.btn-destacado:hover {
+  background-color: #e67347;
+  border-color: #e67347;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/*Estilos del pie de pagina*/
+.pie-pagina {
+  background-color: #006994;
+  color: white;
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/*Le quito los margenes a los parrafos del footer*/
+.pie-pagina p {
+  margin: 0;
+}
+
+/*Boton distinto y guapo pa que destaque el panel del admin*/
+.btn-panel-admin {
+  background-color: #00b894;
+  border-color: #00b894;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/*Animacion para el boton del panel del admin*/
+.btn-panel-admin:hover {
+  background-color: #00a383;
+  border-color: #00a383;
+  transform: translateY(-2px);
+}
+
+/*Estilos para el menu que muestra la foto*/
+.menu-foto {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1050;
+  display: none;
+  overflow-y: auto;
+}
+
+/*Para mostrar el menu*/
+.menu-foto.show {
+  display: block;
+}
+
+/*Estilo del fondo del menu*/
+.menu-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1040;
+  display: none;
+}
+
+.menu-fondo.show {
+  display: block;
+}
+
+/*Estilo del contenido*/
+.menu-contenido {
+  position: relative;
+  margin: 2rem auto;
+  max-width: 900px;
+  background-color: white;
+  border-radius: 8px;
+  z-index: 1051;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/*Restos de destilos del menu para ampliar la foto (estoy harto de poner comentarios)*/
+.menu-cabecera {
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-cuerpo {
+  padding: 1rem;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.imagen-ampliada {
+  max-width: 100%;
+  max-height: 65vh;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.menu-pie {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-cerrar {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.btn-cerrar:hover {
+  color: #495057;
+}
+
+/*Para hacerlo responsivo*/
+@media (max-width: 768px) {
+  .hero-galeria {
+    height: 300px;
+  }
+
+  .foto-imagen {
+    height: 180px;
+  }
+
+  .modal-contenido {
+    margin: 1rem;
+    width: calc(100% - 2rem);
+  }
+}

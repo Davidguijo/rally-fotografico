@@ -1,0 +1,253 @@
+/*Estilos del contenedor del panel*/
+.contenedor-admin {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: #f2f4f8;
+  min-height: 100vh;
+}
+
+/*Estilos del titulo*/
+.titulo-admin {
+  text-align: center;
+  color: #0077a8;
+  margin-bottom: 2rem;
+}
+
+/*Estilos de los botones de arriba*/
+.acciones-admin {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/*Estilo especifico para el boton de ir a la galeria*/
+.boton-galeria {
+  background-color: #0077a8;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+/*Estilos para cuando se le hace hover al boton de galeria*/
+.boton-galeria:hover {
+  background-color: #005f8b;
+  transform: translateY(-2px);
+}
+
+/*Estilos del boton de cerrar sesion*/
+.boton-cerrar-sesion {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+/*Estilos para cuando se le hace hover al boton de cerrar sesion*/
+.boton-cerrar-sesion:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+/*Estilo de las pestañas (donde cambias entre usuarios e imagenes)*/
+.pestanas {
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #0077a8;
+}
+
+/*Estilo del boton de las pestañas*/
+.pestanas button {
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #2B2D42;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/*Estilo del boton de la pestaña seleccionada*/
+.pestanas button.activa {
+  color: #0077a8;
+  font-weight: bold;
+}
+
+/*Estilo subrayado de la pestaña que esta activa*/
+.pestanas button.activa::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #FF7F50;
+  transition: all 0.3s ease;
+}
+
+/*Grid de las tarjetas de fotos*/
+.grid-fotos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/*Estilos de las tarjetas de las fotos*/
+.tarjeta-foto {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-foto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/*Estilos de las imagenes de las tarjetas*/
+.tarjeta-foto img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/*Estilos para la info de las fotos*/
+.info-foto {
+  padding: 1rem;
+  color: #2B2D42;
+}
+
+.info-foto h3 {
+  margin-bottom: 0.5rem;
+}
+
+/*Estilo del contenedor donde van los botones*/
+.acciones-foto {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0 1rem 1rem;
+}
+
+/*Estilo para los botones*/
+button {
+  transition: all 0.3s ease;
+}
+
+/*Estilo del boton de aceptar la foto*/
+.boton-aceptar {
+  background-color: #00b894;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.boton-aceptar:hover {
+  background-color: #00a383;
+  transform: translateY(-2px);
+}
+
+/*Estilo del boton de rechazar la foto*/
+.boton-rechazar,
+.boton-eliminar {
+  background-color: #e74c3c;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.boton-rechazar:hover,
+.boton-eliminar:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+/*Estilos de la tabla de usuarios*/
+.tabla-usuarios {
+  background-color: white;
+  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  padding: 1rem;
+}
+
+.tabla-usuarios table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+/*Estilo del encabezado de la tabla*/
+.tabla-usuarios th {
+  background-color: #f8f9fa;
+  color: #0077a8;
+}
+
+/*Estilo del mensaje cuando no hay nada que mostrar*/
+.mensaje-vacio {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: #7f8c8d;
+}
+
+/*Para hacerlo responsivo*/
+@media (max-width: 768px) {
+  .acciones-admin {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .boton-galeria,
+  .boton-cerrar-sesion {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pestanas {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .pestanas button {
+    width: 100%;
+  }
+
+  .tarjeta-foto img {
+    height: 150px;
+  }
+
+  .tabla-usuarios th,
+  .tabla-usuarios td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+}

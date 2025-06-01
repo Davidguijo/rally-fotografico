@@ -1,0 +1,19 @@
+{
+    "name": "david/backend",
+    "autoload": {
+        "psr-4": {
+            "David\\Backend\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Davidguijo",
+            "email": "126858490+Davidguijo@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^4.14",
+        "slim/psr7": "^1.7",
+        "firebase/php-jwt": "^6.11"
+    }
+}

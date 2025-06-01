@@ -1,0 +1,304 @@
+/*Estilo general del contenedor*/
+.mis-fotos-container {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #2B2D42;
+  line-height: 1.6;
+  padding-top: 56px;
+}
+
+/*Estilos de la barra de navegacion*/
+.navbar {
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #0077a8;
+}
+
+/*Estilos de los enlaces de la barra de navegacion*/
+.nav-link {
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 1rem !important;
+  color: white !important;
+}
+
+/*Linea naranja que sale al hacer hover en los enlaces del menu*/
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+  width: calc(100% - 2rem);
+  height: 2px;
+  background-color: #FF7F50;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+/*Animacion al hacer hover en los enlaces del menu*/
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/*Fondo semitransparente del menu cuando se abre el perfil*/
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+/*Contenido del menu del usuario*/
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+/*Cabecera del menu del usuario*/
+.modal-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*Titulo del menu*/
+.modal-title {
+  margin: 0;
+  font-weight: 600;
+}
+
+/*Cuerpo del menu*/
+.modal-body {
+  padding: 1.5rem;
+}
+
+/*Boton del perfil, el iconico*/
+.btn-perfil {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.3s ease;
+}
+
+/*Estilo al hacer hover en el icono del perfil*/
+.btn-perfil:hover {
+  color: #FF7F50;
+  transform: scale(1.1);
+}
+
+/*Estilo del circulo de la imagen del perfil*/
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #f0f8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/*Animacion al abrir el menu*/
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*Estilos del hero de mis fotos*/
+.mis-fotos-hero {
+  min-height: 40vh;
+  position: relative;
+  background: linear-gradient(rgba(0, 105, 148, 0.7), rgba(0, 105, 148, 0.7)), url('/assets/imagenes/fondomisfotos.jpeg') center/cover;
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-top: -56px;
+}
+
+/*Estilos del boton destacado*/
+.btn-destacado {
+  background-color: #FF7F50;
+  border: 2px solid #FF7F50;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/*Hover del boton*/
+.btn-destacado:hover {
+  background-color: #e67347;
+  border-color: #e67347;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/*Estilo de las tarjetas de las fotos*/
+.foto-card {
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/*Hover de las tarjetas de las fotos*/
+.foto-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/*Imagen de las tarjetas de las fotos*/
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+/*Estilo para mostrar el estado de la foto*/
+.estado-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.8rem;
+  padding: 0.35em 0.65em;
+}
+
+/*Contenedor con los botones para eliminar y editar foto*/
+.acciones-foto {
+  display: flex;
+  padding: 0.75rem;
+  background-color: #E4F1F6;
+}
+
+/*Estilo comun de los botones de eliminar y editar*/
+.btn-editar, .btn-eliminar {
+  flex: 1;
+  margin: 0 0.25rem;
+  padding: 0.375rem;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+/*Estilos del boton de editar*/
+.btn-editar {
+  background-color: #E4F1F6;
+  color: #0077a8;
+  border: 1px solid #0077a8;
+}
+
+/*Hover del boton de editar*/
+.btn-editar:hover {
+  background-color: #c4e3f3;
+}
+
+/*Estilos del boton de eliminar*/
+.btn-eliminar {
+  background-color: #f8d7da;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+/*Hover del boton de eliminar*/
+.btn-eliminar:hover {
+  background-color: #f1b0b7;
+}
+
+/*Contenedor para iconos*/
+.icon-container {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 105, 148, 0.1);
+  color: #0077a8;
+  border-radius: 50%;
+  font-size: 2rem;
+}
+
+/*Estilos del pie de pagina*/
+.pie-pagina {
+  background-color: #006994;
+  color: white;
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/*Texto del pie de pagina*/
+.pie-pagina p {
+  margin: 0;
+}
+
+/*Para desactivar el scroll cuando se abre el menu del usuario*/
+.no-scroll {
+  overflow: hidden;
+}
+
+/*Correcion para boton en los moviles*/
+.btn-modificar-perfil {
+  background-color: #FF7F50;
+  color: white;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.btn-modificar-perfil:hover {
+  background-color: #e67347;
+  transform: scale(1.05);
+}
+
+/*Para modificar el boton del perfil en pc*/
+@media (min-width: 769px) {
+  .btn-perfil {
+    font-size: 2rem;  
+    color: #FF7F50;
+  }
+  .btn-perfil:hover {
+    color: #ff5a1a;
+    transform: scale(1.2)
+  }
+}
+
+/*Lo hago responsive*/
+@media (max-width: 768px) {
+  .mis-fotos-hero {
+    min-height: 30vh;
+    padding: 4rem 0;
+  }
+
+  .display-5 {
+    font-size: 2rem;
+  }
+}

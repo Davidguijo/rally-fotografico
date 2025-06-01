@@ -1,0 +1,92 @@
+<div class="contenedor-admin">
+  <div class="acciones-admin">
+    <!--Boton para ir a la galeria-->
+    <button (click)="irAGaleria()" class="boton-galeria">
+      <i class="bi bi-images"></i> Ir a Galería
+    </button>
+
+    <!--Boton para cerrar sesion-->
+    <button (click)="cerrarSesion()" class="boton-cerrar-sesion">
+      <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+    </button>
+  </div>
+
+  <!--Titulo del panel-->
+  <h1 class="titulo-admin">Panel de Administración</h1>
+
+  <!--Pestañas para cambiar entre la lista de fotos pendientes y de usuarios logueados -->
+  <div class="pestanas">
+    <!--Pestaña de fotps pendientes-->
+    <button (click)="tabActual = 'fotos'" [class.activa]="tabActual === 'fotos'">Fotos Pendientes</button>
+
+    <!--Pestaña de usuarios-->
+    <button (click)="tabActual = 'usuarios'" [class.activa]="tabActual === 'usuarios'">Usuarios</button>
+  </div>
+
+  <!--Seccion para las fotos pendientes-->
+  <div *ngIf="tabActual === 'fotos'" class="seccion-fotos">
+    <!--Mensaje que se muestra cuando no hay fotos por revisar-->
+    <div *ngIf="fotosPendientes.length === 0" class="mensaje-vacio">
+      No hay fotos pendientes de revisión.
+    </div>
+
+    <!--Grid de fotos pendientes-->
+    <div *ngIf="fotosPendientes.length > 0" class="grid-fotos">
+      <!--Tarjeta para cada foto pendiente-->
+      <div *ngFor="let foto of fotosPendientes" class="tarjeta-foto">
+        <!--Imagen de la foto-->
+        <img [src]="'http://localhost/rally-fotografico/backend/uploads/' + foto.ruta_archivo" alt="Foto pendiente">
+
+        <!--Titulo, usuario y fecha de la foto-->
+        <div class="info-foto">
+          <h3>{{ foto.titulo || 'Sin título' }}</h3>
+          <p><strong>Usuario:</strong> {{ foto.usuario_nombre }}</p>
+          <p><strong>Fecha:</strong> {{ foto.fecha_subida | date:'medium' }}</p>
+        </div>
+
+        <!--Botones para aceptar o rechazar la foto-->
+        <div class="acciones-foto">
+          <button (click)="cambiarEstado(foto.id, 'aceptada')" class="boton-aceptar">✅ Aceptar</button>
+          <button (click)="cambiarEstado(foto.id, 'rechazada')" class="boton-rechazar">❌ Rechazar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Seccion para la lista de usuarios-->
+  <div *ngIf="tabActual === 'usuarios'" class="seccion-usuarios">
+    <!--Mensaje cuando no hay usuarios registrados-->
+    <div *ngIf="usuarios.length === 0" class="mensaje-vacio">
+      No hay usuarios registrados.
+    </div>
+
+    <!--Tabla de usuarios-->
+    <div *ngIf="usuarios.length > 0" class="tabla-usuarios">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--Fila de la tabla-->
+          <tr *ngFor="let usuario of usuarios">
+            <td>{{ usuario.nombre }} {{ usuario.apellidos }}</td>
+            <td>{{ usuario.email }}</td>
+
+            <!--Rol del usuario-->
+            <td>{{ usuario.rol === 'administrador' ? 'Administrador' : 'Participante' }}</td>
+
+            <!--Boton para eliminar al usuario-->
+            <td>
+              <button (click)="eliminarUsuario(usuario.id)" class="boton-eliminar">🗑️ Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

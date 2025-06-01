@@ -1,0 +1,181 @@
+/*Hero con la imagen de fondo*/
+.hero-subir-foto {
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(rgba(0, 105, 148, 0.7), rgba(0, 105, 148, 0.7)), url('/assets/imagenes/imagen2.jpg') center/cover fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+/*Contenedor del formulario*/
+.contenedor-subir-foto {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem;
+  padding: 2rem;
+  background: rgba(187, 217, 219, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/*Titulo del formulario*/
+h2 {
+  color: #0077a8;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+/*Grupo del formulario*/
+.grupo-formulario {
+  margin-bottom: 1.5rem;
+}
+
+/*Estilos de los labels*/
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #2B2D42;
+}
+
+/*Estilos de los inputs de texto y de archivo*/
+input[type="text"], input[type="file"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #E4F1F6;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #F8F9FA;
+}
+
+/*Estilos solo para el input de archivos (para el input de las fotos)*/
+input[type="file"] {
+  padding: 0.5rem;
+  background-color: transparent;
+}
+
+/*Focus de los inputs*/
+input:focus {
+  outline: none;
+  border-color: #0077a8;
+  box-shadow: 0 0 0 2px rgba(0, 119, 168, 0.2);
+}
+
+/*Borcecillo rojo cuando en input no es valido*/
+input.invalid {
+  border-color: #dc3545;
+}
+
+/*Estilo del mensaje de error cuando algun campo no esta bien*/
+.mensaje-error {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/*Estilo del boton para subir la foto*/
+button {
+  background-color: #FF7F50;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 100%;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+/*Estilo para cuando el boton este habilitado*/
+button:hover:not(:disabled) {
+  background-color: #e67347;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*Estilo para cuando el boton este deshabilitado*/
+button:disabled {
+  background-color: #8D99AE;
+  cursor: not-allowed;
+}
+
+/*Contenedor de la vista previa de las fotos*/
+.vista-previa {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+/*Estilos de la imagen de la vista previa*/
+.vista-previa img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  border: 2px solid #E4F1F6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/*Estilo para las alertas*/
+.alerta {
+  padding: 0.75rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/*Estilo de alerta de que ha salido bien*/
+.alerta-exito {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/*Estilo de la alerta de error (esta no ha salido bien)*/
+.alerta-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/*Estilo de los enlaces de debajo del formulario*/
+.enlaces-formulario {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+/*Estilo de los enlaces de volves*/
+.enlace-volver {
+  color: #0077a8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/*Hover para los enlaces*/
+.enlace-volver:hover {
+  color: #004d66;
+  text-decoration: underline;
+}
+
+/*Estilo para cuando los inputs son invalidos o tocados (cuando no son correcetos vamos)*/
+input.ng-invalid.ng-touched {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+/*Para hacerlo responsivo*/
+@media (max-width: 768px) {
+  .contenedor-subir-foto {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .vista-previa img {
+    max-height: 250px;
+  }
+}

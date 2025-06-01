@@ -1,0 +1,189 @@
+<div class="mis-fotos-container">
+  <!--Barra de navegacion igual que la del home-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container">
+      <!--Logo y titulo del inicio-->
+      <a class="navbar-brand d-flex align-items-center" routerLink="/">
+        <img src="assets/imagenes/logo.jpg" alt="Logo" style="height: 45px;" class="me-2">
+        <span class="fw-bold fs-3">DeepShot</span>
+      </a>
+
+      <!--Botón para el menu en moviles-->
+      <button class="navbar-toggler" type="button" (click)="menuAbierto = !menuAbierto">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!--Menu de navegacion-->
+      <div class="collapse navbar-collapse" [class.show]="menuAbierto">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <!--Enlaces visibles para todo el mundo-->
+          <li class="nav-item"><a class="nav-link" routerLink="/">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/galeria">Galería</a></li>
+
+          <!--Enlaces que solo ven quienes no estan logueados-->
+          @if (!estaAutenticado) {
+            <li class="nav-item"><a class="nav-link" routerLink="/registro">Regístrate</a></li>
+            <li class="nav-item ms-lg-2"><a class="btn btn-destacado" routerLink="/login">Iniciar Sesión</a></li>
+          }
+
+          <!--Enlaces para usuarios logueados-->
+          @if (estaAutenticado) {
+            <li class="nav-item"><a class="nav-link" routerLink="/subir-foto">Subir Foto</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="/mis-fotos">Mi Espacio</a></li>
+            <li class="nav-item ms-lg-2"><button class="btn btn-outline-light" (click)="cerrarSesion()">Cerrar Sesión</button></li>
+          }
+        </ul>
+
+        <!--Boton para abrir el menu de perfil (tiene que estar logueado)-->
+        @if (estaAutenticado) {
+          <div class="d-flex align-items-center ms-lg-3">
+            <!--Boton para los moviles-->
+            <button class="btn btn-modificar-perfil d-lg-none" (click)="alternarMenuPerfil()">
+              <i class="bi bi-person-circle me-1"></i> Modificar Perfil
+            </button>
+
+            <!--Boton para ordnador-->
+            <button class="btn btn-perfil d-none d-lg-inline" (click)="alternarMenuPerfil()">
+              <i class="bi bi-person-circle"></i>
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </nav>
+
+  <!--Menu con info de la persona-->
+  @if (mostrarMenuPerfil) {
+    <div class="modal-overlay" (click)="alternarMenuPerfil()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h5 class="modal-title">Mi Perfil</h5>
+          <button type="button" class="btn-close" (click)="alternarMenuPerfil()"></button>
+        </div>
+
+        <div class="modal-body">
+          @if (usuario) {
+            <!--Datos del usuario-->
+            <div class="text-center mb-4">
+              <div class="profile-picture mb-3">
+                <i class="bi bi-person-circle" style="font-size: 4rem; color: #0077a8;"></i>
+              </div>
+              <h4 class="mb-2">{{usuario.nombre}} {{usuario.apellidos}}</h4>
+              <p class="text-muted">{{usuario.email}}</p>
+            </div>
+
+            <!--Campos readonly para que no se puedan modificar -->
+            <div class="mb-4">
+              <h5 class="mb-3">Datos Personales</h5>
+              <div class="mb-3"><label class="form-label">DNI</label><input type="text" class="form-control" [value]="usuario.dni" readonly></div>
+              <div class="mb-3"><label class="form-label">Nombre</label><input type="text" class="form-control" [value]="usuario.nombre" readonly></div>
+              <div class="mb-3"><label class="form-label">Apellidos</label><input type="text" class="form-control" [value]="usuario.apellidos" readonly></div>
+              <div class="mb-3"><label class="form-label">Email</label><input type="text" class="form-control" [value]="usuario.email" readonly></div>
+              <div class="mb-3"><label class="form-label">Teléfono</label><input type="tel" class="form-control" [value]="usuario.telefono" readonly></div>
+            </div>
+
+            <!--Botones para que el usuario elimine su cuenta o edite su perfil-->
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary" (click)="abrirEditarPerfil()"><i class="bi bi-pencil me-2"></i> Editar Perfil</button>
+              <button class="btn btn-outline-danger" (click)="eliminarCuenta()"><i class="bi bi-box-arrow-right me-2"></i> Eliminar Perfil</button>
+            </div>
+          } @else {
+            <!--Boton de cargando-->
+            <div class="text-center py-4">
+              <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando...</span></div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+  <!--Cabecera de la pagina-->
+  <header class="mis-fotos-hero">
+    <div class="container h-100 d-flex align-items-center">
+      <div class="text-center text-white w-100">
+        <h1 class="display-5 fw-bold mb-3">Mis Fotografías</h1>
+        <p class="lead mb-4">Gestiona todas tus imágenes subidas al rally</p>
+        <a routerLink="/subir-foto" class="btn btn-destacado btn-lg px-4">
+          <i class="bi bi-cloud-arrow-up me-2"></i>Subir Nueva Foto
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!--Contenedor principal-->
+  <section class="py-5">
+    <div class="container">
+      
+      <!--Tarjeta con cuantas fotos lleva el usuario-->
+      <div class="card mb-5 border-0 shadow-sm">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h3 class="fw-bold mb-1">Mi participación</h3>
+              <p class="text-muted mb-0">Llevas <strong>{{fotos.length}} fotos</strong> subidas de 5 posibles</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Esto se mostrará si el usuario aún no ha subido ninguna foto-->
+      <div *ngIf="fotos.length === 0" class="text-center py-5">
+        <div class="icon-container mb-4">
+          <i class="bi bi-images"></i>
+        </div>
+        <h3 class="fw-bold mb-3">Aún no has subido fotos</h3>
+        <p class="text-muted mb-4">Participa en el rally subiendo tus mejores fotografías submarinas</p>
+        <a routerLink="/subir-foto" class="btn btn-destacado btn-lg px-4">Subir mi primera foto</a>
+      </div>
+
+      <!--Esto en cambio, se muestra si el usuario ya tiene fotos subidas-->
+      <div *ngIf="fotos.length > 0" class="row g-4">
+        <div *ngFor="let foto of fotos" class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm foto-card" [class.border-warning]="foto.estado === 'pendiente'">
+
+            <!--Se muestra la imagen junto al estado-->
+            <div class="position-relative">
+              <img [src]="'http://localhost/rally-fotografico/backend/uploads/' + foto.ruta_archivo" 
+                   class="card-img-top" 
+                   [alt]="foto.titulo || 'Foto sin título'">
+              <span class="badge estado-badge" 
+                    [class.bg-warning]="foto.estado === 'pendiente'"
+                    [class.bg-success]="foto.estado === 'aceptada'"
+                    [class.bg-danger]="foto.estado === 'rechazada'">
+                {{ foto.estado | titlecase }}
+              </span>
+            </div>
+
+            <!--Muestra el titulo y la fecha de la foto-->
+            <div class="card-body">
+              <h5 class="card-title">{{ foto.titulo || 'Sin título' }}</h5>
+              <p class="card-text text-muted">
+                <small>Subida el {{ foto.fecha_subida | date:'dd/MM/yyyy' }}</small>
+              </p>
+            </div>
+
+            <!--Botones para editar o eliminar la foto (editar solo se puede si la foto esta pendiente)-->
+            <div class="card-footer bg-transparent border-0 acciones-foto">
+              <button (click)="editarFoto(foto.id)" class="btn btn-editar" *ngIf="foto.estado === 'pendiente'">
+                <i class="bi bi-pencil me-1"></i> Editar
+              </button>
+              <button (click)="eliminarFoto(foto.id)" class="btn btn-eliminar">
+                <i class="bi bi-trash me-1"></i> Eliminar
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Pie de pagina-->
+  <footer class="pie-pagina">
+    <div class="container">
+      <p>&copy; 2025 DeepShot Rally Fotográfico Submarino. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+</div>

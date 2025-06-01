@@ -1,0 +1,192 @@
+<!--Barra de navegacion-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container">
+    <!--Logo y nombre-->
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
+      <img src="assets/imagenes/logo.jpg" alt="Logo" style="height: 45px;" class="me-2">
+      <span class="fw-bold fs-3">DeepShot</span>
+    </a>
+
+    <!--Boton responsivo-->
+    <button class="navbar-toggler" type="button" (click)="alternarMenu()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!--Menu de navegacion-->
+    <div class="collapse navbar-collapse" [class.show]="menuAbierto">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!--Enlaces del menu-->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/galeria">Galería</a>
+        </li>
+
+        <!--Estos enlaces se muestran si el usuario aun no se ha autenticado-->
+        @if (!estaAutenticado) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/registro">Regístrate</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-destacado" routerLink="/login">Iniciar Sesión</a>
+          </li>
+        }
+
+        <!--Y bueno si esta autenticado pues se muestran estos otros-->
+        @if (estaAutenticado && rol === 'participante') {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/subir-foto">Subir Foto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/mis-fotos">Mi Espacio</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <button class="btn btn-outline-light" (click)="cerrarSesion()">Cerrar Sesión</button>
+          </li>
+        }
+
+        <!--Si es admin se muestra un boton secerto, pero no se muestra ni mis-fotos ni subir-foto-->
+        @if (estaAutenticado && rol === 'administrador') {
+          <li class="nav-item ms-lg-2">
+            <button class="btn btn-outline-light" (click)="cerrarSesion()">Cerrar Sesión</button>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-panel-admin" routerLink="/admin">Acceder al Panel</a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!--Hero con un fondo guapo para presentar la galeria-->
+<header class="hero-galeria">
+  <div class="overlay-hero"></div>
+  <div class="container h-100 d-flex align-items-center">
+    <div class="text-center text-white w-100">
+      <h1 class="display-4 fw-bold mb-4">Galería Submarina</h1>
+      <p class="lead mb-5">Descubre las fotografías más votadas</p>
+    </div>
+  </div>
+</header>
+
+<!--Cuadrito de informacion para los votos-->
+<div class="alert alert-info text-center rounded-pill shadow-sm mb-4" role="alert" style="font-size: 1.1rem;">
+  <i class="bi bi-heart-fill text-primary me-2"></i>
+  <strong>¡Tienes 5 votos para repartir!</strong>
+  <i class="bi bi-heart-fill text-primary me-2"></i><br>
+  Puedes votar varias veces a la misma foto o repartirlos entre todas las que más te gusten.
+  <br>
+  ¡Vota las que más te gusten y haz que destaquen!
+</div>
+
+
+<!--Seccion principal de la galeria-->
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <!--Titulo y botones para ordenar las fotos-->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <h2 class="fw-bold text-primary">Fotografías</h2>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <div class="btn-group">
+          <button (click)="ordenarPor('votos')" class="btn btn-outline-primary">
+            <i class="bi bi-heart-fill me-1"></i> Más votadas
+          </button>
+          <button (click)="ordenarPor('fecha')" class="btn btn-outline-primary">
+            <i class="bi bi-clock me-1"></i> Recientes
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!--Grid de fotos haciendo uso de un bucle for-->
+    <div class="row g-4">
+      <div *ngFor="let foto of fotos" class="col-md-6 col-lg-6 col-xl-4">
+        <div class="card h-100 border-0 shadow-sm foto-card">
+          
+          <!--Imagenes y sus votos - Añadido (click) para abrir modal-->
+          <div class="position-relative overflow-hidden" (click)="abrirFotoAmpliada(foto)" style="cursor: pointer;">
+            <img [src]="'http://localhost/rally-fotografico/backend/uploads/' + foto.ruta_archivo" 
+                 class="card-img-top foto-imagen"
+                 [alt]="foto.titulo">
+            <div class="foto-badge">
+              <span class="badge bg-primary">
+                {{ foto.total_votos || 0 }} <i class="bi bi-heart-fill ms-1"></i>
+              </span>
+            </div>
+          </div>
+
+          <!--Titulo y fecha de la foto-->
+          <div class="card-body">
+            <h3 class="h5">{{ foto.titulo || 'Sin título' }}</h3>
+            <p class="text-muted small">
+              <i class="bi bi-calendar me-1"></i> {{ foto.fecha_subida | date:'dd/MM/yyyy' }}
+            </p>
+          </div>
+
+          <!--Boton votar con una carga to guapa-->
+          <div class="card-footer bg-transparent">
+            <button (click)="votar(foto.id); $event.stopPropagation()" 
+                    class="btn btn-primary w-100"
+                    [disabled]="votando === foto.id">
+              <!--Si no esta votando se muesrtra normal-->
+              <span *ngIf="votando !== foto.id">
+                <i class="bi bi-heart me-1"></i> Votar
+              </span>
+              <!--Si esta votando se muestra esa animacion de carga-->
+              <span *ngIf="votando === foto.id">
+                <span class="spinner-border spinner-border-sm me-1"></span> Votando...
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Mensaje que se muestra cuando no hay ni una foto-->
+    <div *ngIf="fotos.length === 0" class="text-center py-5">
+      <div class="icono-vacio mb-4">
+        <i class="bi bi-images"></i>
+      </div>
+      <h3 class="fw-bold text-muted mb-3">La galería está vacía</h3>
+      <p class="text-muted">Sube la primera foto para iniciar el rally</p>
+    </div>
+  </div>
+</section>
+
+<!--Menu para ver la fotoss-->
+<div class="menu-foto" [class.show]="mostrarModal" *ngIf="mostrarModal">
+  <div class="menu-contenido">
+    <div class="menu-cabecera">
+      <h5>{{fotoSeleccionada?.titulo || 'Sin título'}}</h5>
+      <button type="button" class="btn-cerrar" (click)="cerrarFotoAmpliada()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="menu-cuerpo">
+      <img [src]="baseUrl + fotoSeleccionada?.ruta_archivo" 
+           class="imagen-ampliada"
+           [alt]="fotoSeleccionada?.titulo">
+    </div>
+    <div class="menu-pie">
+      <p class="text-muted small">
+        <i class="bi bi-calendar me-1"></i> {{ fotoSeleccionada?.fecha_subida | date:'dd/MM/yyyy' }}
+      </p>
+      <span class="badge bg-primary">
+        {{ fotoSeleccionada?.total_votos || 0 }} <i class="bi bi-heart-fill ms-1"></i>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="menu-fondo" [class.show]="mostrarModal" (click)="cerrarFotoAmpliada()" *ngIf="mostrarModal"></div>
+
+<!--Footer de la pagina-->
+<footer class="pie-pagina">
+  <div class="container">
+    <p>&copy; 2025 DeepShot Rally Fotográfico Submarino. Todos los derechos reservados.</p>
+  </div>
+</footer>

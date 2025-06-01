@@ -1,0 +1,73 @@
+<div class="pagina-editar-foto">
+  <!--Cabecera-->
+  <header class="hero-editar-foto">
+    <div class="contenedor-editar-foto">
+      <h2>Editar Foto</h2>
+      
+      <!--Formulario reacitvo-->
+      <form [formGroup]="formularioEditarFoto" (ngSubmit)="onSubmit()">
+        
+        <!--Campo de titulo-->
+        <div class="grupo-formulario">
+          <label>Título de la foto</label>
+          <input 
+            type="text" 
+            formControlName="titulo"
+            placeholder="Ej: Un pececico precioso"
+            [class.invalid]="formularioEditarFoto.get('titulo')?.invalid && formularioEditarFoto.get('titulo')?.touched">
+          
+          <!--Validaciones del titulo-->
+          <div *ngIf="formularioEditarFoto.get('titulo')?.invalid && formularioEditarFoto.get('titulo')?.touched" 
+               class="mensaje-error">
+            <div *ngIf="formularioEditarFoto.get('titulo')?.errors?.['required']">
+              El título es obligatorio
+            </div>
+            <div *ngIf="formularioEditarFoto.get('titulo')?.errors?.['maxlength']">
+              Máximo 20 caracteres
+            </div>
+          </div>
+        </div>
+
+        <!--Campo archivo-->
+        <div class="grupo-formulario">
+          <label>Cambiar imagen</label>
+          <input 
+            type="file" 
+            (change)="onFileChange($event)"
+            accept="image/jpeg, image/png">
+          
+          <!--Mensaje de error-->
+          <div *ngIf="mensajeError" class="mensaje-error">
+            {{ mensajeError }}
+          </div>
+        </div>
+
+        <!--Vista previa de la imagen si hay-->
+        <div *ngIf="imagenPrevia" class="vista-previa">
+          <h3>{{ formularioEditarFoto.value.titulo || 'Sin título' }}</h3>
+          <img [src]="imagenPrevia" alt="Vista previa">
+        </div>
+
+        <!--Boton de guardar cambios-->
+        <div class="botones-accion">
+          <button 
+            type="submit"
+            [disabled]="formularioEditarFoto.invalid"
+            class="btn-guardar">
+            Guardar Cambios
+          </button>
+        </div>
+
+        <!--Mensaje de exito si nada ha petao-->
+        <div *ngIf="mensajeExito" class="alerta alerta-exito">
+          {{ mensajeExito }}
+        </div>
+
+        <!--Enlace para volver a mis-fotos-->
+        <div class="enlaces-formulario">
+          <a routerLink="/mis-fotos" class="enlace-volver">Volver a mis fotos</a>
+        </div>
+      </form>
+    </div>
+  </header>
+</div>

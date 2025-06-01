@@ -1,0 +1,214 @@
+/*Estilos generales de la pagina*/
+.contenedor-home {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #2B2D42;
+  line-height: 1.6;
+  overflow-x: hidden;
+  padding-top: 56px;
+}
+
+/*Estilos de la barra de navegacion*/
+.navbar {
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+  background-color: #0077a8;
+}
+
+/*Estilo para el nombre de Deepshot*/
+.navbar-brand {
+  font-size: 1.25rem;
+  color: white;
+}
+
+/*Enlaces del menu de navegacion*/
+.nav-link {
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 1rem !important;
+  color: white !important;
+}
+
+/*Linea al pasar por los enlaces del menu*/
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+  width: calc(100% - 2rem);
+  height: 2px;
+  background-color: #FF7F50;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/*Seccion hero con la imagen de fondo de los peces (o lo que sea ya ni me acuerdo)*/
+.seccion-hero {
+  min-height: 100vh;
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/imagenes/fondo.jpg') center/cover fixed;
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-top: -56px;
+}
+
+/*Color azul traslucido que le da el toque al fondo*/
+.overlay-hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 105, 148, 0.3);
+  z-index: 0;
+}
+
+/*Contenido del hero puesto por encima*/
+.contenido-hero {
+  position: relative;
+  z-index: 1;
+}
+
+/*Estilos de las tarjetas de vida marina, flora, etc*/
+.tarjeta-caracteristica {
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  background-color: white;
+}
+
+/*Animacion al pasar (hacer hover) por encima de esas tarjetas*/
+.tarjeta-caracteristica:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  background-color: #7fc7e4;
+}
+
+/*Icono de las tarjetas*/
+.contenedor-icono {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  background-color: rgba(0, 105, 148, 0.1);
+  color: #0077a8;
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+/*Contenedor para las bases del concurso*/
+.lista-bases {
+  max-width: 600px;
+}
+
+/*Icononico de la numeracion de reglas del concurso*/
+.insignia-base {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0077a8;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/*Estilo para la imagen que esta en lo de las bases del concurso*/
+.imagen-bases {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+/*Animacion al hacer hover en la imagen*/
+.imagen-bases:hover {
+  transform: scale(1.02);
+}
+
+/*Estilo de las imagenes de los ganadores de otros años (de internet jijiji)*/
+.imagen-testimonio {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/*Estilos para el boton destacado*/
+.btn-destacado {
+  background-color: #FF7F50;
+  border-color: #FF7F50;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+/*Estilos del hover del boton destacado*/
+.btn-destacado:hover {
+  background-color: #e67347;
+  border-color: #e67347;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/*Estilos del pie de pagina*/
+.pie-pagina {
+  background-color: #006994;
+  color: white;
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/*Quito los margenes*/
+.pie-pagina p {
+  margin: 0;
+}
+
+/*Botón del panel de administrador*/
+.btn-panel-admin {
+  background-color: #00b894;
+  border-color: #00b894;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/*Hover del panel de administrador*/
+.btn-panel-admin:hover {
+  background-color: #00a383;
+  border-color: #00a383;
+  transform: translateY(-2px);
+}
+
+/*Para hacerlo responsivo*/
+@media (max-width: 768px) {
+  .navbar-collapse {
+    padding: 1rem;
+    background-color: #004d66;
+    margin-top: 0.5rem;
+    border-radius: 8px;
+  }
+
+  .display-3 {
+    font-size: 2rem;
+  }
+
+  .imagen-bases {
+    margin-top: 2rem;
+  }
+}

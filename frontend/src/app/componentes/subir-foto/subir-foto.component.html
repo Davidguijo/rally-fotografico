@@ -1,0 +1,82 @@
+<div class="pagina-subir-foto">
+  <!--Cabecera de subir foto-->
+  <header class="hero-subir-foto">
+    <div class="contenedor-subir-foto">
+      <h2>Subir Foto</h2>
+
+      <!--Formulario reactivo -->
+      <form [formGroup]="formularioSubirFoto" (ngSubmit)="onSubmit()">
+
+        <!--Campo titulo-->
+        <div class="grupo-formulario">
+          <label>Título de la foto</label>
+          <input 
+            type="text" 
+            formControlName="titulo"
+            placeholder="Ej: Un pececico precioso"
+            [class.invalid]="formularioSubirFoto.get('titulo')?.invalid && formularioSubirFoto.get('titulo')?.touched">
+
+          <!--Validaciones para el titulo-->
+          <div *ngIf="formularioSubirFoto.get('titulo')?.invalid && formularioSubirFoto.get('titulo')?.touched" 
+               class="mensaje-error">
+            <div *ngIf="formularioSubirFoto.get('titulo')?.errors?.['required']">
+              El título es obligatorio
+            </div>
+            <div *ngIf="formularioSubirFoto.get('titulo')?.errors?.['maxlength']">
+              Máximo 20 caracteres
+            </div>
+          </div>
+        </div>
+
+        <!--Campo de archivo-->
+        <div class="grupo-formulario">
+          <label>Selecciona una imagen</label>
+          <input 
+            type="file" 
+            (change)="onFileChange($event)"
+            accept="image/jpeg, image/png"
+            [class.invalid]="formularioSubirFoto.get('archivo')?.invalid && formularioSubirFoto.get('archivo')?.touched">
+
+          <!--Validaciones para el archivo-->
+          <div *ngIf="formularioSubirFoto.get('archivo')?.invalid && formularioSubirFoto.get('archivo')?.touched" 
+               class="mensaje-error">
+            <div *ngIf="formularioSubirFoto.get('archivo')?.errors?.['required']">
+              Debe seleccionar una imagen
+            </div>
+          </div>
+
+          <!--Mensaje de error por si algo ha ido mal-->
+          <div *ngIf="mensajeError" class="mensaje-error">
+            {{ mensajeError }}
+          </div>
+        </div>
+
+        <!--Vista previa de la imagen-->
+        <div *ngIf="imagenPrevia" class="vista-previa">
+          <h3>{{ formularioSubirFoto.value.titulo || 'Sin título' }}</h3>
+          <img [src]="imagenPrevia" alt="Vista previa">
+        </div>
+
+        <!--Boton de envio que se desabilita si el formulario es invalido o no hay archivo-->
+        <button 
+          type="submit"
+          [disabled]="formularioSubirFoto.invalid || !archivo">
+          Subir Foto
+        </button>
+
+        <!--Mensaje de que todo ha ido bien-->
+        <div *ngIf="mensajeExito" class="alerta alerta-exito">
+          {{ mensajeExito }}
+        </div>
+
+        <!--Enlaces para volver al espacio del usuario o para ir al home-->
+        <div class="enlaces-formulario">
+          <a routerLink="/mis-fotos" class="enlace-volver">Volver a mis fotos</a>
+        </div>
+        <div class="enlaces-formulario">
+          <a routerLink="/" class="enlace-volver">Volver a la página principal</a>
+        </div>
+      </form>
+    </div>
+  </header>
+</div>
