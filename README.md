@@ -125,7 +125,7 @@ Agradecimientos a las siguientes herramientas de desarrollo:
 
 
 
-### Licencia
+## Licencia
 
 Este proyecto está licenciado bajo la **Licencia MIT**.  
 Consulta el archivo [LICENSE](./LICENSE) para más información.
