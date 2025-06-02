@@ -5,8 +5,8 @@
 
 DeepShot es una aplicación web que permite a una serie de usuarios participar en un concurso de fotografía submarina.
 Los usuarios pueden registrarse, subir fotos, votar las imágenes que más le gusten, etc.
-El administrador tiene acceso a la gestión de imágenes (puede rechazar o aceptar imágenes) ytambién puede gestionar usuarios (elimando a los usuarios que el crea conveniente).
-Es una web desarrollada con Angular (frontend), PHP (backend) y MySQL (como sistema gestor de base de datos).
+El administrador tiene acceso a la gestión de imágenes (puede rechazar o aceptar imágenes) y también puede gestionar usuarios (eliminando a los usuarios que el crea conveniente).
+La aplicación ha sido desarrollada utilizando Angular para el frontend, PHP para el backend y MySQL como sistema gestor de base de datos.
 
 
 
@@ -53,13 +53,13 @@ Por defecto su host es localhost, el nombre de la base de datos es rally_fotogra
 
 1. Si hiciste bien el paso 1, en tu terminal de windows deberías de estar en la carpeta rally_fotográfico.
 2. Ahora pon el siguiente comando: "ng serve -o".
-3. Este comando hará que se habra una nueva pestaña en tu navegador automáticamente, y ya podrás ver la web desplegada.
+3. Este comando hará que se abra una nueva pestaña en tu navegador automáticamente, y ya podrás ver la web desplegada.
 (El -o del comando anterior hace que se habra la página automáticamente, si solo introduces ng serve tendrás que poner esta url en tu navegador: "http://localhost:4200/").
 
 
 ### Paso 5: Verificación final
 
-1. Una vez que la web se ha desplegado, puedes probar todas y cada una de las funcionalidades de esta
+1. Una vez que la web se ha desplegado, puedes probar todas y cada una de las funcionalidades disponibles.
 
 
 
@@ -80,12 +80,12 @@ Por defecto su host es localhost, el nombre de la base de datos es rally_fotogra
 - **Inicio de sesion:** Los usuarios que ya están registrados acceden al sistema usando su correo y contraseña.
 - **Subir fotografías:** Los usuarios registrados pueden subir fotografías junto con un título (el límite es de 5 fotografías). Además su estado se establece como "pendiente".
 - **Ver sus fotos:** Los usuarios pueden ver las imágenes que han subido en la pestaña "Mi espacio".
-- **Editar sus fotos:** Los usuarios pueden editar las fotos que han subido, modificando el título, la imagen o ambas cosas. Solo pueden editar imagenes cuyp estado sea "pendiente".
+- **Editar sus fotos:** Los usuarios pueden editar las fotos que han subido, modificando el título, la imagen o ambas cosas. Solo pueden editar imagenes cuyo estado sea "pendiente".
 - **Eliminar sus fotos:** Los usuarios pueden eliminar imágenes que hayan subido, no importa cual sea el estado de la imagen.
 - **Ver datos personales:** Los usuarios pueden ver la información de su perfil, clicando en el icono de perfil en la página "Mi espacio".       
 - **Eliminar cuenta:** Los usuarios pueden eliminar su perfil, eliminando todas las imágenes que hayan subido en el proceso.
 - **Editar perfil:** Los usuarios pueden editar su perfil, modificando uno o varios campos permitidos para editar.
-- **Cerrar sesion:** Los usuarios logueados pueden cerrar sesión.
+- **Cerrar sesion:** Los usuarios autenticados pueden cerrar sesión.
 
 
 ### Administradores    
@@ -95,6 +95,7 @@ Por defecto su host es localhost, el nombre de la base de datos es rally_fotogra
 - **Validar fotos:** Los administradores pueden aceptar o rechazar las fotos subidas (con estado "pendiente"), estableciendo así el estado de la imagen a "aceptada" o "rechazada".
 - **Ver listado de participantes:** El administrador tiene acceso al listado de usuarios que están registrados, pudiendo ver así información relevante sobre los usuarios.
 - **Eliminar usuarios:** El administrador puede eliminar a usuarios, eliminando así también las fotos que estos hayan subido.
+- **Cerrar sesion:** Los administradores pueden cerrar sesión.
 
 
 
@@ -113,7 +114,7 @@ Agradecimientos a las siguientes herramientas de desarrollo:
 
 - **XAMPP:** Herramienta de servidor local para el desarrollo.
 
-- **Booststrap:** Librería para el diseño visual de la web.
+- **Bootstrap:** Librería para el diseño visual de la web.
 
 - **Github:** Para la gestión de repositorio y control de versiones.
 
