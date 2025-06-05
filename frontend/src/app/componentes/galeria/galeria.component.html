@@ -168,7 +168,7 @@
       </button>
     </div>
     <div class="menu-cuerpo">
-      <img [src]="baseUrl + fotoSeleccionada?.ruta_archivo" 
+      <img [src]="'http://localhost/rally-fotografico/backend/uploads/' + fotoSeleccionada?.ruta_archivo" 
            class="imagen-ampliada"
            [alt]="fotoSeleccionada?.titulo">
     </div>
