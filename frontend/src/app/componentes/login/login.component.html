@@ -14,7 +14,7 @@
           <!--Comprobaciones para ver si los datos han sido rellenados correctamente (esto se hace en todos los campos)-->
           <div *ngIf="controles['email'].touched && controles['email'].invalid" class="mensaje-error">
             <div *ngIf="controles['email'].errors?.['required']">El correo es obligatorio</div>
-            <div *ngIf="controles['email'].errors?.['email']">Formato de correo inválido</div>
+            <div *ngIf="controles['email'].errors?.['pattern']">Introduce un correo con un formato válido</div>
           </div>
         </div>
 

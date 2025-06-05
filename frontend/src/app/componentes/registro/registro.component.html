@@ -46,7 +46,7 @@
           <input type="email" id="email" formControlName="email" placeholder="tu@email.com">
           <div *ngIf="controles['email'].touched && controles['email'].invalid" class="mensaje-error">
             <div *ngIf="controles['email'].errors?.['required']">El correo es obligatorio</div>
-            <div *ngIf="controles['email'].errors?.['email']">Formato de correo inválido</div>
+            <div *ngIf="controles['email'].errors?.['pattern']">Introduce un correo con un formato válido</div>
           </div>
         </div>
 

@@ -36,7 +36,7 @@ export class RegistroComponent {
       ]],
       email: ['', [
         Validators.required, //Campo email obligatorio
-        Validators.email //Validacion del email
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) //Utilizo un validador personalizado, pues el que viene por defecto (Validators.email) no valida que haya un . y algo al final
       ]],
       telefono: ['', [
         Validators.required, //Campo telefono obligatorio

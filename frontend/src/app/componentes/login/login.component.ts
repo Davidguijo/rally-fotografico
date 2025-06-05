@@ -22,7 +22,7 @@ export class LoginComponent {
     this.formularioLogin = this.fb.group({
       email: ['', [
         Validators.required, //Campo email obligatorio
-        Validators.email //Valido que el tener formato de correo
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) //Utilizo un validador personalizado, pues el que viene por defecto (Validators.email) no valida que haya un . y algo al final
       ]],
       password: ['', [
         Validators.required, //Campo contraseña obligatorio

@@ -21,10 +21,24 @@ export class EditarUsuarioComponent implements OnInit {
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private ruta: Router  ) {
     //Para hacer las validaciones
     this.formularioUsuario = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-      apellidos: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],
-      email: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]]
+      nombre: ['', [
+        Validators.required, 
+        Validators.minLength(2), 
+        Validators.maxLength(20)
+      ]],
+      apellidos: ['', [
+        Validators.required, 
+        Validators.minLength(5), 
+        Validators.maxLength(40)
+      ]],
+      email: ['', [
+        Validators.required, 
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) //Utilizo un validador personalizado, pues el que viene por defecto (Validators.email) no valida que haya un . y algo al final
+      ]],
+      telefono: ['', [
+        Validators.required, 
+        Validators.pattern(/^[0-9]{9}$/)
+      ]]
     });
   }
 

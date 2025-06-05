@@ -294,8 +294,9 @@
 /*Lo hago responsive*/
 @media (max-width: 768px) {
   .mis-fotos-hero {
-    min-height: 30vh;
-    padding: 4rem 0;
+    min-height: auto;
+    padding-top: 6rem;
+    padding-bottom: 2rem;
   }
 
   .display-5 {
