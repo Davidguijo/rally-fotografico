@@ -2,10 +2,10 @@
 //Archivo de conexion a la base de datos
 
 //Aqui establezco los parametros para la conexion
-$host = 'sql313.infinityfree.com';
-$dbname = 'if0_39085599_rally';
-$usuario = 'if0_39085599';
-$password = 'AIlts6vQyKdqie3';
+$host = 'localhost';
+$dbname = 'rally_fotografico';
+$usuario = 'root';
+$password = '';
 
 //Intento establecer la conexion
 try {
