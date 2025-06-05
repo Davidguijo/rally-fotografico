@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { AuthService } from '../../servicios/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent {
       ]],
       password: ['', [
         Validators.required, //Campo contraseña obligatorio
-        Validators.minLength(8) //Que el campo de la contraseña tenga 8 caracteres como minimo
+        Validators.minLength(8), //Que el campo de la contraseña tenga 8 caracteres como minimo
+        this.sinEspacios //Para validar que la contraseña no sean solo espacios
       ]]
     });
   }
@@ -66,5 +68,11 @@ export class LoginComponent {
   //Un get para acceder facilmente a los controles del formulario desde el html
   get controles() {
     return this.formularioLogin.controls;
+  }
+
+  //Validador personalizado para que el usuario no pueda introducir solo espacios
+  sinEspacios(control: AbstractControl) {
+    const valor = control.value || '';
+    return valor.trim().length === 0 ? { soloEspacios: true } : null;
   }
 }

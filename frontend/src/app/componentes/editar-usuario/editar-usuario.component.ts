@@ -24,12 +24,14 @@ export class EditarUsuarioComponent implements OnInit {
       nombre: ['', [
         Validators.required, 
         Validators.minLength(2), 
-        Validators.maxLength(20)
+        Validators.maxLength(20),
+        this.sinEspacios //Para que no sea valido solamente introducir espacios en blanco
       ]],
       apellidos: ['', [
         Validators.required, 
         Validators.minLength(5), 
-        Validators.maxLength(40)
+        Validators.maxLength(40),
+        this.sinEspacios
       ]],
       email: ['', [
         Validators.required, 
@@ -37,7 +39,8 @@ export class EditarUsuarioComponent implements OnInit {
       ]],
       telefono: ['', [
         Validators.required, 
-        Validators.pattern(/^[0-9]{9}$/)
+        Validators.pattern(/^[0-9]{9}$/),
+        this.sinEspacios
       ]]
     });
   }
@@ -107,5 +110,11 @@ export class EditarUsuarioComponent implements OnInit {
   //Un get para acceder facilmente a los controles del formulario desde el html
   get controles() {
     return this.formularioUsuario.controls;
+  }
+
+  //Validador personalizado para que el usuario no pueda introducir solo espacios
+  sinEspacios(control: AbstractControl) {
+    const valor = control.value || '';
+    return valor.trim().length === 0 ? { soloEspacios: true } : null;
   }
 }

@@ -6,6 +6,7 @@ import { FotoService } from '../../servicios/foto.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-foto',
@@ -29,7 +30,8 @@ export class EditarFotoComponent implements OnInit {
     this.formularioEditarFoto = this.fb.group({
       titulo: ["", [
         Validators.required, //Titulo obligatorio obligatorio
-        Validators.maxLength(20) //Titulo de maximo 20 caracteres
+        Validators.maxLength(20), //Titulo de maximo 20 caracteres
+        this.sinEspacios //Validador personalizado para que el titulo no solo tenga espacios en blanco
       ]],
       archivo: [null] //Campo para el archivo nuevo
     });
@@ -133,5 +135,11 @@ export class EditarFotoComponent implements OnInit {
         console.log("Error: " + err);
       }
     });
+  }
+
+  //Validador personalizado para que el usuario no pueda introducir solo espacios
+  sinEspacios(control: AbstractControl) {
+    const valor = control.value || '';
+    return valor.trim().length === 0 ? { soloEspacios: true } : null;
   }
 }

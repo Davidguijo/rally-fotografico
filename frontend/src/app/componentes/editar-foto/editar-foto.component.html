@@ -17,14 +17,10 @@
             [class.invalid]="formularioEditarFoto.get('titulo')?.invalid && formularioEditarFoto.get('titulo')?.touched">
           
           <!--Validaciones del titulo-->
-          <div *ngIf="formularioEditarFoto.get('titulo')?.invalid && formularioEditarFoto.get('titulo')?.touched" 
-               class="mensaje-error">
-            <div *ngIf="formularioEditarFoto.get('titulo')?.errors?.['required']">
-              El título es obligatorio
-            </div>
-            <div *ngIf="formularioEditarFoto.get('titulo')?.errors?.['maxlength']">
-              Máximo 20 caracteres
-            </div>
+          <div *ngIf="formularioEditarFoto.get('titulo')?.invalid && formularioEditarFoto.get('titulo')?.touched" class="mensaje-error">
+            <div *ngIf="formularioEditarFoto.get('titulo')?.errors?.['required']">El título es obligatorio</div>
+            <div *ngIf="formularioEditarFoto.get('titulo')?.errors?.['maxlength']">Máximo 20 caracteres</div>
+            <div *ngIf="formularioEditarFoto.get('titulo')?.errors?.['soloEspacios']">El titulo no puede contener solo espacios</div>
           </div>
         </div>
 
@@ -58,7 +54,7 @@
           </button>
         </div>
 
-        <!--Mensaje de exito si nada ha petao-->
+        <!--Mensaje de exito si nada se ha roto-->
         <div *ngIf="mensajeExito" class="alerta alerta-exito">
           {{ mensajeExito }}
         </div>

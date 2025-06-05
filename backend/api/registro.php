@@ -27,6 +27,12 @@ foreach ($requiredFields as $field) {
     }
 }
 
+//Compruebo que nombre, apellidos y telefono no sean solo espacios en blanco
+if (trim($data['nombre']) === '' || trim($data['apellidos']) === '' || trim($data['telefono']) === '') {
+    echo json_encode(['success' => false, 'error' => 'El nombre, apellidos y/o telefono no pueden tener solo espacios en blanco']);
+    exit;
+}
+
 //Comprueba que el dni tenga el patron adecuado, 8 numeros seguidos de una letra
 if (!preg_match('/^[0-9]{8}[A-Za-z]$/', $data['dni'])) {
     echo json_encode(['success' => false, 'error' => 'DNI no válido']);

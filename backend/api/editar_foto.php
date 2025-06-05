@@ -41,6 +41,12 @@ if (!$fotoId || !$titulo) {
     exit;
 }
 
+//Valido que el titulo no sea solo espacios en blanco
+if (trim($titulo) === '') {
+    echo json_encode(['success' => false, 'error' => 'El titulo está vacio o solo tiene espacios en blanco']);
+    exit;
+}
+
 //Validacion de longitud del título, que son 20 caracteres como maximo
 if (mb_strlen($titulo, 'UTF-8') > 20) {
     echo json_encode(['success' => false, 'error' => 'El título no puede exceder 20 caracteres']);

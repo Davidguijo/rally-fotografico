@@ -30,6 +30,12 @@ if (empty($data['nombre']) || empty($data['apellidos']) || empty($data['email'])
     exit;
 }
 
+//Valido que nombre, apellidos y telefono no sean solo espacios en blanco
+if (trim($data['nombre']) === '' || trim($data['apellidos']) === '' || trim($data['telefono']) === '') {
+    echo json_encode(['success' => false, 'error' => 'El nombre, apellidos y/o telefono no pueden tener solo espacios en blanco']);
+    exit;
+}
+
 //Verifico que el email tenga un formato valido
 if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
     echo json_encode(['success' => false, 'error' => 'Formato de email inválido']);

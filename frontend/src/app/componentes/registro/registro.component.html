@@ -26,6 +26,7 @@
             <div *ngIf="controles['nombre'].errors?.['required']">El nombre es obligatorio</div>
             <div *ngIf="controles['nombre'].errors?.['minlength']">Mínimo 2 caracteres</div>
             <div *ngIf="controles['nombre'].errors?.['maxlength']">Máximo 20 caracteres</div>
+            <div *ngIf="controles['nombre'].errors?.['soloEspacios']">El nombre no puede contener solo espacios en blanco</div>
           </div>
         </div>
 
@@ -37,6 +38,7 @@
             <div *ngIf="controles['apellidos'].errors?.['required']">Los apellidos son obligatorios</div>
             <div *ngIf="controles['apellidos'].errors?.['minlength']">Mínimo 5 caracteres</div>
             <div *ngIf="controles['apellidos'].errors?.['maxlength']">Máximo 40 caracteres</div>
+            <div *ngIf="controles['apellidos'].errors?.['soloEspacios']">El campo apellido no puede contener solo espacios en blanco</div>
           </div>
         </div>
 
@@ -57,6 +59,7 @@
           <div *ngIf="controles['telefono'].touched && controles['telefono'].invalid" class="mensaje-error">
             <div *ngIf="controles['telefono'].errors?.['required']">El teléfono es obligatorio</div>
             <div *ngIf="controles['telefono'].errors?.['pattern']">Deben ser 9 números</div>
+            <div *ngIf="controles['telefono'].errors?.['soloEspacios']">El telefono no puede contener solo espacios en blanco</div>
           </div>
         </div>
 
@@ -67,6 +70,7 @@
           <div *ngIf="controles['password'].touched && controles['password'].invalid" class="mensaje-error">
             <div *ngIf="controles['password'].errors?.['required']">La contraseña es obligatoria</div>
             <div *ngIf="controles['password'].errors?.['minlength']">Mínimo 8 caracteres</div>
+            <div *ngIf="controles['password'].errors?.['soloEspacios']">La contraseña no puede contener solo espacios en blanco</div>
             <div *ngIf="controles['password'].errors?.['pattern']">
               Debe contener mayúsculas, minúsculas y números
             </div>

@@ -44,10 +44,10 @@
           <p><strong>Fecha:</strong> {{ foto.fecha_subida | date:'medium' }}</p>
         </div>
 
-        <!--Botones para aceptar o rechazar la foto-->
+        <!--Botones para aceptar o rechazar la foto con sus iconitos-->
         <div class="acciones-foto">
-          <button (click)="cambiarEstado(foto.id, 'aceptada')" class="boton-aceptar">✅ Aceptar</button>
-          <button (click)="cambiarEstado(foto.id, 'rechazada')" class="boton-rechazar">❌ Rechazar</button>
+          <button (click)="cambiarEstado(foto.id, 'aceptada')" class="boton-aceptar"><i class="bi bi-check-circle-fill text-success" style="font-size: 1.5rem;padding-right: 0.3em;"></i>Aceptar</button>
+          <button (click)="cambiarEstado(foto.id, 'rechazada')" class="boton-rechazar"><i class="bi bi-x-circle-fill text-danger" style="font-size: 1.5rem; padding-right: 0.3em;"></i>Rechazar</button>
         </div>
       </div>
     </div>
@@ -82,7 +82,7 @@
 
             <!--Boton para eliminar al usuario-->
             <td>
-              <button (click)="eliminarUsuario(usuario.id)" class="boton-eliminar">🗑️ Eliminar</button>
+              <button (click)="eliminarUsuario(usuario.id)" class="boton-eliminar"><i class="bi bi-trash-fill text-white" style="font-size: 1.5rem; padding-right: 0.3em;"></i>Eliminar</button>
             </td>
           </tr>
         </tbody>

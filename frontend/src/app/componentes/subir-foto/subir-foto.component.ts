@@ -3,6 +3,7 @@ import { FotoService } from '../../servicios/foto.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-subir-foto',
@@ -23,7 +24,8 @@ export class SubirFotoComponent {
     this.formularioSubirFoto = this.fb.group({
       titulo: ['', [
         Validators.required, //Campo titulo obligatorio
-        Validators.maxLength(20) //Longitud maxima de 20 caracteres
+        Validators.maxLength(20), //Longitud maxima de 20 caracteres
+        this.sinEspacios //Validador personalizado para que no cuente solo los espacios
       ]],
       archivo: [null, [
         Validators.required //Archivo requerido
@@ -95,5 +97,11 @@ export class SubirFotoComponent {
         this.mensajeError = "Error en la conexión con el servidor";
       }
     });
+  }
+
+  //Validador personalizado para que el usuario no pueda introducir solo espacios
+  sinEspacios(control: AbstractControl) {
+    const valor = control.value || '';
+    return valor.trim().length === 0 ? { soloEspacios: true } : null;
   }
 }

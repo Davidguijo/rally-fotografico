@@ -25,6 +25,7 @@
           <div *ngIf="controles['password'].touched && controles['password'].invalid" class="mensaje-error">
             <div *ngIf="controles['password'].errors?.['required']">La contraseña es obligatoria</div>
             <div *ngIf="controles['password'].errors?.['minlength']">Mínimo 8 caracteres</div>
+            <div *ngIf="controles['password'].errors?.['soloEspacios']">La contraseña no puede contener solo espacios en blanco</div>
           </div>
         </div>
 

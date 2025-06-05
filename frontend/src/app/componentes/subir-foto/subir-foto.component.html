@@ -7,42 +7,31 @@
       <!--Formulario reactivo -->
       <form [formGroup]="formularioSubirFoto" (ngSubmit)="onSubmit()">
 
-        <!--Campo titulo-->
+        <!--Campo titulo, que es obligatorio y tiene un máximo de caracteres-->
         <div class="grupo-formulario">
-          <label>Título de la foto</label>
+          <label for="titulo">Título de la foto</label>
           <input 
             type="text" 
+            id="titulo"
             formControlName="titulo"
-            placeholder="Ej: Un pececico precioso"
-            [class.invalid]="formularioSubirFoto.get('titulo')?.invalid && formularioSubirFoto.get('titulo')?.touched">
-
-          <!--Validaciones para el titulo-->
-          <div *ngIf="formularioSubirFoto.get('titulo')?.invalid && formularioSubirFoto.get('titulo')?.touched" 
-               class="mensaje-error">
-            <div *ngIf="formularioSubirFoto.get('titulo')?.errors?.['required']">
-              El título es obligatorio
-            </div>
-            <div *ngIf="formularioSubirFoto.get('titulo')?.errors?.['maxlength']">
-              Máximo 20 caracteres
-            </div>
+            placeholder="Ej: Un pececico precioso">
+          <div *ngIf="formularioSubirFoto.get('titulo')?.touched && formularioSubirFoto.get('titulo')?.invalid" class="mensaje-error">
+            <div *ngIf="formularioSubirFoto.get('titulo')?.errors?.['required']">El título es obligatorio</div>
+            <div *ngIf="formularioSubirFoto.get('titulo')?.errors?.['maxlength']">Máximo 20 caracteres</div>
+            <div *ngIf="formularioSubirFoto.get('titulo')?.errors?.['soloEspacios']">El titulo no puede contener solo espacios</div>
           </div>
         </div>
 
-        <!--Campo de archivo-->
+        <!--Campo de archivo, que es obligatorio-->
         <div class="grupo-formulario">
-          <label>Selecciona una imagen</label>
+          <label for="archivo">Selecciona una imagen</label>
           <input 
             type="file" 
+            id="archivo"
             (change)="onFileChange($event)"
-            accept="image/jpeg, image/png"
-            [class.invalid]="formularioSubirFoto.get('archivo')?.invalid && formularioSubirFoto.get('archivo')?.touched">
-
-          <!--Validaciones para el archivo-->
-          <div *ngIf="formularioSubirFoto.get('archivo')?.invalid && formularioSubirFoto.get('archivo')?.touched" 
-               class="mensaje-error">
-            <div *ngIf="formularioSubirFoto.get('archivo')?.errors?.['required']">
-              Debe seleccionar una imagen
-            </div>
+            accept="image/jpeg, image/png">
+          <div *ngIf="formularioSubirFoto.get('archivo')?.touched && formularioSubirFoto.get('archivo')?.invalid" class="mensaje-error">
+            <div *ngIf="formularioSubirFoto.get('archivo')?.errors?.['required']">Debe seleccionar una imagen</div>
           </div>
 
           <!--Mensaje de error por si algo ha ido mal-->
@@ -51,16 +40,14 @@
           </div>
         </div>
 
-        <!--Vista previa de la imagen-->
+        <!--Vista previa de la imagen si hay-->
         <div *ngIf="imagenPrevia" class="vista-previa">
           <h3>{{ formularioSubirFoto.value.titulo || 'Sin título' }}</h3>
           <img [src]="imagenPrevia" alt="Vista previa">
         </div>
 
         <!--Boton de envio que se desabilita si el formulario es invalido o no hay archivo-->
-        <button 
-          type="submit"
-          [disabled]="formularioSubirFoto.invalid || !archivo">
+        <button type="submit" [disabled]="formularioSubirFoto.invalid || !archivo">
           Subir Foto
         </button>
 

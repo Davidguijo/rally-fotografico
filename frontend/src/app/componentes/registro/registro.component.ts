@@ -20,34 +20,38 @@ export class RegistroComponent {
   constructor(private fb: FormBuilder, private authService: AuthService, private ruta: Router) {
     //Hago las validaciones del formulario
     this.formularioRegistro = this.fb.group({
-      dni: ['', [
+      dni: ["", [
         Validators.required, //Campo dni obligatorio
         this.validarDniReal.bind(this) //Hago uso de la validacion real del dni
       ]],
-      nombre: ['', [
+      nombre: ["", [
         Validators.required, //Campo nombre obligatorio
         Validators.minLength(2), //Minima longitud (2)
-        Validators.maxLength(20) //Maxima longitud (20)
+        Validators.maxLength(20), //Maxima longitud (20)
+        this.sinEspacios
       ]],
-      apellidos: ['', [
+      apellidos: ["", [
         Validators.required, //Campo apellidos obligatorio
         Validators.minLength(5), //Minima longitud (5)
-        Validators.maxLength(40) //Maxima longitud (20)
+        Validators.maxLength(40), //Maxima longitud (20)
+        this.sinEspacios
       ]],
-      email: ['', [
+      email: ["", [
         Validators.required, //Campo email obligatorio
         Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) //Utilizo un validador personalizado, pues el que viene por defecto (Validators.email) no valida que haya un . y algo al final
       ]],
-      telefono: ['', [
+      telefono: ["", [
         Validators.required, //Campo telefono obligatorio
-        Validators.pattern(/^[0-9]{9}$/) //Expresion regular para comprobar que tenga 9 digitos
+        Validators.pattern(/^[0-9]{9}$/), //Expresion regular para comprobar que tenga 9 digitos
+        this.sinEspacios
       ]],
-      password: ['', [
+      password: ["", [
         Validators.required, //Campo contraseña obligatorio
         Validators.minLength(8), //Minima longitud (8)
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/) //Expresion regular para que la contraseña tenga al menos 1 minuscula, 1 mayuscula y 1 numero
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/), //Expresion regular para que la contraseña tenga al menos 1 minuscula, 1 mayuscula y 1 numero
+        this.sinEspacios
       ]],
-      confirmarContrasena: ['', Validators.required] //Campo de repetir las contraseñas obligatorio
+      confirmarContrasena: ["", Validators.required] //Campo de repetir las contraseñas obligatorio
     }, {
       //Validador creado para comprobar que la contraseña y confirmarContraseña coincidan
       validator: this.validarCoincidenciaContrasenas
@@ -67,6 +71,12 @@ export class RegistroComponent {
     const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
     const letraCalculada = letras.charAt(Number(dni.substring(0,8)) % 23);
     return dni.charAt(8) === letraCalculada ? null : { dniInvalido: true };
+  }
+
+  //Validador personalizado para que el usuario no pueda introducir solo espacios
+  sinEspacios(control: AbstractControl) {
+    const valor = control.value || '';
+    return valor.trim().length === 0 ? { soloEspacios: true } : null;
   }
 
   //Metodo que va a enviar el formulario

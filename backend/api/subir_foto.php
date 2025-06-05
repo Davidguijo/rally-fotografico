@@ -41,6 +41,12 @@ if (empty($titulo)) {
     exit;
 }
 
+//Compruebo que el titulo no sea solo espacios en blanco
+if (trim($titulo) === '') {
+    echo json_encode(['success' => false, 'error' => 'El titulo está vacio o solo tiene espacios en blanco']);
+    exit;
+}
+
 //Compruebo que el titulo no tenga mas de 20 caracteres
 if (mb_strlen($titulo, 'UTF-8') > 20) {
     echo json_encode(['success' => false, 'error' => 'El título no puede exceder 20 caracteres']);
