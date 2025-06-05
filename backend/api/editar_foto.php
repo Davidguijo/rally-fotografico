@@ -42,8 +42,8 @@ if (!$fotoId || !$titulo) {
 }
 
 //Validacion de longitud del título, que son 20 caracteres como maximo
-if (strlen($titulo) > 20) {
-    echo json_encode(['success' => false, 'error' => 'El título no puede exceder 100 caracteres']);
+if (mb_strlen($titulo, 'UTF-8') > 20) {
+    echo json_encode(['success' => false, 'error' => 'El título no puede exceder 20 caracteres']);
     exit;
 }
 

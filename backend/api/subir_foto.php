@@ -42,7 +42,7 @@ if (empty($titulo)) {
 }
 
 //Compruebo que el titulo no tenga mas de 20 caracteres
-if (strlen($titulo) > 20) {
+if (mb_strlen($titulo, 'UTF-8') > 20) {
     echo json_encode(['success' => false, 'error' => 'El título no puede exceder 20 caracteres']);
     exit;
 }
