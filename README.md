@@ -52,8 +52,8 @@ Por defecto su host es localhost, el nombre de la base de datos es rally_fotogra
 ### Paso 4: Configurar el frontend
 
 1. Si hiciste bien el paso 1, en tu terminal de windows deberías de estar en la carpeta rally_fotografico.
-3. Accede a la carpeta frontend con “cd frontend”, y pon el comando “npm install”. 
-2. Ahora pon el siguiente comando: "ng serve -o".
+2. Accede a la carpeta frontend con “cd frontend”, y pon el comando “npm install”. 
+3. Ahora pon el siguiente comando: "ng serve -o".
 4. Este comando hará que se abra una nueva pestaña en tu navegador automáticamente, y ya podrás ver la web desplegada.
 (El -o del comando anterior hace que se habra la página automáticamente, si solo introduces ng serve tendrás que poner esta url en tu navegador: "http://localhost:4200/").
 
